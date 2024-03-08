@@ -10,7 +10,7 @@ function ImageGrid() {
     return images;
   };
 
-  const imageContext = import.meta.glob("../../photos/*.jpg");
+  const imageContext = import.meta.glob("../../public/photos/*.jpg");
   const images = importImages(imageContext);
   useEffect(() => {
     console.log(images);
