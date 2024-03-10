@@ -68,7 +68,7 @@ function App() {
               href="https://dobler.studio"
               target="_blank"
               rel="noreferrer"
-              className="hover:text-slate-300"
+              className="text-slate-300 hover:text-slate-600 underline"
             >
               Jake Dobler
             </a>{" "}
