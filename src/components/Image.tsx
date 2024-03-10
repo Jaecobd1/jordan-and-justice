@@ -54,7 +54,7 @@ function Image({ image, index }: { image: string; index: number }) {
               onClick={() => {
                 navigator.share({
                   title: "Jordan & Justice",
-                  text: "Check out this image!",
+                  text: "Check out this image from Jordan and Justice's wedding! And view the rest at https://jordan-and-justice.dobler.studio/",
                   url: image,
                 });
               }}
