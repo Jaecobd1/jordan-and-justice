@@ -65,10 +65,10 @@ function App() {
           <span className="text-sm">
             Website and photography by{" "}
             <a
-              href="https://dobler.studio"
+              href="https://portfolio.dobler.studio"
               target="_blank"
               rel="noreferrer"
-              className="text-slate-300 hover:text-slate-600 underline"
+              className="text-slate-400 hover:text-slate-600 underline"
             >
               Jake Dobler
             </a>{" "}
