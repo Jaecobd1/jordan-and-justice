@@ -30,7 +30,7 @@ function App() {
         initial="hidden"
         animate="visible"
         transition={{ duration: 3 }}
-        className=" h-screen relative"
+        className="h-[45%] md:h-screen relative"
       >
         <motion.div
           variants={textVariants}
