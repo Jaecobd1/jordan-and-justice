@@ -60,6 +60,22 @@ function App() {
       <div id="img-grid" className="pt-4">
         <ImageGrid />
       </div>
+      <footer>
+        <span className="flex flex-col items-end w-full p-4 mt-6 text-xs">
+          <span className="text-sm">
+            Website and photography by{" "}
+            <a
+              href="https://dobler.studio"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-slate-300"
+            >
+              Jake Dobler
+            </a>{" "}
+          </span>
+          &copy; Dobler Media 2024
+        </span>
+      </footer>
     </div>
   );
 }
