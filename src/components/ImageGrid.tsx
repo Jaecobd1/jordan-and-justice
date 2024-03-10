@@ -22,7 +22,7 @@ function ImageGrid() {
     return images;
   };
 
-  const imageContext = import.meta.glob("../../photos/*.jpg");
+  const imageContext = import.meta.glob("/photos/*.jpg");
   const [images, setImages] = useState(importImages(imageContext));
 
   const totalImageCount = Array.from(Object.keys(imageContext)).length;
