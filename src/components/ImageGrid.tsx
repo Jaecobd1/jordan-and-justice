@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import images from "../../imagePaths.json";
 
 function ImageGrid() {
   const [displayCountMultiplier, setDisplayCountMultiplier] = useState(1);
@@ -22,41 +23,41 @@ function ImageGrid() {
     return images;
   };
 
-  const imageContext = import.meta.glob("/photos/*.jpg");
-  const [images, setImages] = useState(importImages(imageContext));
+  // const imageContext = import.meta.glob("/photos/*.jpg");
+  // const [images, setImages] = useState(importImages(imageContext));
 
-  const totalImageCount = Array.from(Object.keys(imageContext)).length;
-  const [hideLoadMore, setHideLoadMore] = useState(false);
-  const loadMore = () => {
-    setDisplayCountMultiplier(displayCountMultiplier + 1);
-    if (filter === "Older") setImages(importImages(Object.keys(imageContext)));
-    else if (filter === "Newer")
-      setImages(importImages(Object.keys(reversedImageContext)));
-    else if (filter === "Random")
-      setImages(
-        importImages(Object.keys(imageContext).sort(() => Math.random() - 0.5))
-      );
-    if (totalImageCount < 25 * displayCountMultiplier) {
-      setHideLoadMore(true);
-    }
-  };
+  // const totalImageCount = Array.from(Object.keys(imageContext)).length;
+  // const [hideLoadMore, setHideLoadMore] = useState(false);
+  // const loadMore = () => {
+  //   setDisplayCountMultiplier(displayCountMultiplier + 1);
+  //   if (filter === "Older") setImages(importImages(Object.keys(imageContext)));
+  //   else if (filter === "Newer")
+  //     setImages(importImages(Object.keys(reversedImageContext)));
+  //   else if (filter === "Random")
+  //     setImages(
+  //       importImages(Object.keys(imageContext).sort(() => Math.random() - 0.5))
+  //     );
+  //   if (totalImageCount < 25 * displayCountMultiplier) {
+  //     setHideLoadMore(true);
+  //   }
+  // };
 
-  const [filter, setFilter] = useState("Older");
-  const reversedImageContext = Object.fromEntries(
-    Object.entries(imageContext).reverse()
-  );
+  // const [filter, setFilter] = useState("Older");
+  // const reversedImageContext = Object.fromEntries(
+  //   Object.entries(imageContext).reverse()
+  // );
 
-  useEffect(() => {
-    if (filter === "Older") {
-      setImages(importImages(Object.keys(imageContext)));
-    } else if (filter === "Newer") {
-      setImages(importImages(Object.keys(reversedImageContext)));
-    } else if (filter === "Random") {
-      setImages(
-        importImages(Object.keys(imageContext).sort(() => Math.random() - 0.5))
-      );
-    }
-  }, [filter]);
+  // useEffect(() => {
+  //   if (filter === "Older") {
+  //     setImages(importImages(Object.keys(imageContext)));
+  //   } else if (filter === "Newer") {
+  //     setImages(importImages(Object.keys(reversedImageContext)));
+  //   } else if (filter === "Random") {
+  //     setImages(
+  //       importImages(Object.keys(imageContext).sort(() => Math.random() - 0.5))
+  //     );
+  //   }
+  // }, [filter]);
 
   const imageVariants = {
     hidden: {
@@ -72,14 +73,14 @@ function ImageGrid() {
   return (
     <div className="mt-4 flex flex-col">
       <div className="flex flex-col w-2/5 text-center mx-auto">
-        <select
-          onChange={(e) => setFilter(e.target.value)}
+        {/* <select
+          // onChange={(e) => setFilter(e.target.value)}
           className="border-2 border-black p-2 rounded-lg"
         >
           <option value="Older">Older</option>
           <option value="Newer">Newer</option>
           <option value="Random">Random</option>
-        </select>
+        </select> */}
         <a
           className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-6 p-4 w-44 mx-auto"
           href="../../photos/j&j edited.zip"
@@ -142,17 +143,16 @@ function ImageGrid() {
         })}
       </div> */}
       <div className="flex flex-wrap -mx-4 mt-4">
-        {Object.keys(images).map((key) => {
-          if (typeof images[key] !== "string") return;
+        {images.map((image: string, index) => {
           return (
             <div
               className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-4"
-              key={key}
+              key={index}
             >
-              <div className=" relative overflow-hidden rounded shadow-md">
+              <div className=" relative overflow-hidden rounded shadow-md group">
                 <a
-                  href={key}
-                  download={key.split("/").pop()}
+                  href={image}
+                  download={image.split("/").pop()}
                   className="flex sm:hidden cursor-pointer rounded-lg m-1 absolute group-hover:flex z-10 sm:text-black h-12 w-12 top-0 sm:bg-slate-300/40  items-center justify-center right-0 hover:bg-slate-900 hover:text-white bg-slate-900 text-white"
                 >
                   <svg
@@ -172,19 +172,19 @@ function ImageGrid() {
                   </svg>
                 </a>
                 <a
-                  href={images[key]}
+                  href={image}
                   target="_blank"
                   className="position  h-full w-full"
                 >
-                  {typeof images[key] === "string" ? (
+                  {typeof image === "string" ? (
                     <motion.img
                       initial="hidden"
                       animate="visible"
                       variants={imageVariants}
                       transition={{ duration: 1 }}
                       whileHover={{ scale: 1.1 }}
-                      src={images[key]}
-                      alt={images[key]}
+                      src={image}
+                      alt={image}
                       className="object-cover w-full h-full aspect-w-1 aspect-h-1"
                     />
                   ) : (
@@ -197,9 +197,9 @@ function ImageGrid() {
         })}
       </div>
       <button
-        onClick={() => loadMore()}
+        // onClick={() => loadMore()}
         className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-6 w-44 mx-auto mb-6"
-        hidden={hideLoadMore}
+        // hidden={hideLoadMore}
       >
         Load More
       </button>
