@@ -1,6 +1,6 @@
-// import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import images from "../../imagePaths.json";
+import { useEffect, useState } from "react";
 
 function ImageGrid() {
   // const [displayCountMultiplier, setDisplayCountMultiplier] = useState(1);
@@ -42,22 +42,29 @@ function ImageGrid() {
   //   }
   // };
 
-  // const [filter, setFilter] = useState("Older");
+  const [filter, setFilter] = useState("Older");
   // const reversedImageContext = Object.fromEntries(
   //   Object.entries(imageContext).reverse()
   // );
+  const [displayImages, setDisplayImages] = useState(
+    images.filter((_, i) => i < 25)
+  );
 
-  // useEffect(() => {
-  //   if (filter === "Older") {
-  //     setImages(importImages(Object.keys(imageContext)));
-  //   } else if (filter === "Newer") {
-  //     setImages(importImages(Object.keys(reversedImageContext)));
-  //   } else if (filter === "Random") {
-  //     setImages(
-  //       importImages(Object.keys(imageContext).sort(() => Math.random() - 0.5))
-  //     );
-  //   }
-  // }, [filter]);
+  useEffect(() => {
+    if (filter === "Older") {
+      setDisplayImages(images.slice(0, 25));
+    } else if (filter === "Newer") {
+      setDisplayImages([...images].reverse().slice(0, 25));
+    } else if (filter === "Random") {
+      setDisplayImages(
+        [...images].sort(() => Math.random() - 0.5).slice(0, 25)
+      );
+    }
+  }, [filter, images]);
+
+  useEffect(() => {
+    console.log(displayImages);
+  }, [displayImages]);
 
   const imageVariants = {
     hidden: {
@@ -69,20 +76,42 @@ function ImageGrid() {
       opacity: 1,
     },
   };
+  const loadMore = () => {
+    if (filter === "Older") {
+      setDisplayImages((prevImages) => [
+        ...prevImages,
+        ...images.slice(prevImages.length, prevImages.length + 25),
+      ]);
+    } else if (filter === "Newer") {
+      setDisplayImages((prevImages) => [
+        ...prevImages,
+        ...[...images]
+          .reverse()
+          .slice(prevImages.length, prevImages.length + 25),
+      ]);
+    } else if (filter === "Random") {
+      setDisplayImages((prevImages) => [
+        ...prevImages,
+        ...[...images]
+          .sort(() => Math.random() - 0.5)
+          .slice(prevImages.length, prevImages.length + 25),
+      ]);
+    }
+  };
 
   return (
-    <div className="mt-4 flex flex-col">
-      <div className="flex flex-col w-2/5 text-center mx-auto">
-        {/* <select
-          // onChange={(e) => setFilter(e.target.value)}
+    <div className="mt-4 flex flex-col w-4/5 mx-auto">
+      <div className="flex justify-between w-full text-center mx-auto">
+        <select
+          onChange={(e) => setFilter(e.target.value)}
           className="border-2 border-black p-2 rounded-lg"
         >
           <option value="Older">Older</option>
           <option value="Newer">Newer</option>
           <option value="Random">Random</option>
-        </select> */}
+        </select>
         <a
-          className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-6 p-4 w-44 mx-auto"
+          className="border-2 text-slate-700 hover:text-slate-500 border-slate-700 hover:border-slate-500 font-bold py-2 px-4 rounded-lg p-4 w-44"
           href="../../photos/j&j edited.zip"
           download="j&j edited.zip"
         >
@@ -143,7 +172,7 @@ function ImageGrid() {
         })}
       </div> */}
       <div className="flex flex-wrap -mx-4 mt-4">
-        {images.map((image: string, index) => {
+        {displayImages.map((image: string, index) => {
           return (
             <div
               className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-4"
@@ -197,9 +226,9 @@ function ImageGrid() {
         })}
       </div>
       <button
-        // onClick={() => loadMore()}
+        onClick={() => loadMore()}
         className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded mt-6 w-44 mx-auto mb-6"
-        // hidden={hideLoadMore}
+        hidden={displayImages.length === images.length}
       >
         Load More
       </button>
