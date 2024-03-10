@@ -1,27 +1,27 @@
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import images from "../../imagePaths.json";
 
 function ImageGrid() {
-  const [displayCountMultiplier, setDisplayCountMultiplier] = useState(1);
-  const importImages = (r: Record<string, any>) => {
-    const images: Record<string, any> = {};
-    let count = 0;
-    if (!r.length) {
-      for (const key in r) {
-        if (count > 25 * displayCountMultiplier) break;
-        images[count] = r[key];
-        count++;
-      }
-    } else {
-      r.map((key: any, index: any) => {
-        if (index > 24 * displayCountMultiplier) return;
-        images[index] = key;
-      });
-    }
-    console.log(images);
-    return images;
-  };
+  // const [displayCountMultiplier, setDisplayCountMultiplier] = useState(1);
+  // const importImages = (r: Record<string, any>) => {
+  //   const images: Record<string, any> = {};
+  //   let count = 0;
+  //   if (!r.length) {
+  //     for (const key in r) {
+  //       if (count > 25 * displayCountMultiplier) break;
+  //       images[count] = r[key];
+  //       count++;
+  //     }
+  //   } else {
+  //     r.map((key: any, index: any) => {
+  //       if (index > 24 * displayCountMultiplier) return;
+  //       images[index] = key;
+  //     });
+  //   }
+  //   console.log(images);
+  //   return images;
+  // };
 
   // const imageContext = import.meta.glob("/photos/*.jpg");
   // const [images, setImages] = useState(importImages(imageContext));
