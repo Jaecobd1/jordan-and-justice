@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import images from "../../imagePaths.json";
 import { useEffect, useState } from "react";
+import { IoIosMore } from "react-icons/io";
+import Image from "./Image";
 
 function ImageGrid() {
   // const [displayCountMultiplier, setDisplayCountMultiplier] = useState(1);
@@ -66,16 +68,6 @@ function ImageGrid() {
     console.log(displayImages);
   }, [displayImages]);
 
-  const imageVariants = {
-    hidden: {
-      scale: 0.8,
-      opacity: 0,
-    },
-    visible: {
-      scale: 1,
-      opacity: 1,
-    },
-  };
   const loadMore = () => {
     if (filter === "Older") {
       setDisplayImages((prevImages) => [
@@ -172,57 +164,8 @@ function ImageGrid() {
         })}
       </div> */}
       <div className="flex flex-wrap -mx-4 mt-4">
-        {displayImages.map((image: string, index) => {
-          return (
-            <div
-              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-4"
-              key={index}
-            >
-              <div className=" relative overflow-hidden rounded shadow-md group">
-                <a
-                  href={image}
-                  download={image.split("/").pop()}
-                  className="flex sm:hidden cursor-pointer rounded-lg m-1 absolute group-hover:flex z-10 sm:text-black h-12 w-12 top-0 sm:bg-slate-300/40  items-center justify-center right-0 hover:bg-slate-900 hover:text-white bg-slate-900 text-white"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                </a>
-                <a
-                  href={image}
-                  target="_blank"
-                  className="position  h-full w-full"
-                >
-                  {typeof image === "string" ? (
-                    <motion.img
-                      initial="hidden"
-                      animate="visible"
-                      variants={imageVariants}
-                      transition={{ duration: 1 }}
-                      whileHover={{ scale: 1.1 }}
-                      src={image}
-                      alt={image}
-                      className="object-cover w-full h-full aspect-w-1 aspect-h-1"
-                    />
-                  ) : (
-                    <span className="w-full h-full bg-slate-300/40"></span>
-                  )}
-                </a>
-              </div>
-            </div>
-          );
+        {displayImages.map((image: string, index: number) => {
+          return <Image image={image} index={index} />;
         })}
       </div>
       <button

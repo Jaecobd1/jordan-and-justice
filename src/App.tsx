@@ -43,7 +43,7 @@ function App() {
             Jordan & Justice
           </h1>
           <strong className="text-6xl lg:text-8xl"> Gilliam</strong>
-          <h2 className="text-2xl lg:text-4xl z-10">Feburary 24th 2024</h2>
+          <h2 className="text-2xl lg:text-4xl z-10">Feburary 24th, 2024</h2>
           <a
             href="#img-grid"
             className="hover:border-slate-300 hover:text-slate-300 border-2 border-white rounded-lg px-4 my-2"
