@@ -18,13 +18,16 @@ function Image({ image, index }: { image: string; index: number }) {
   return (
     <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 px-4 mb-4" key={index}>
       <div className=" relative overflow-hidden rounded shadow-md group">
-        <div className="flex sm:hidden cursor-pointer rounded-lg m-1 absolute group-hover:flex z-10 sm:text-black h-12 w-12 top-0 sm:bg-slate-300/40  items-center justify-center right-0 hover:bg-slate-900 hover:text-white bg-slate-900 text-white">
-          <button className="" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <div
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="flex sm:hidden cursor-pointer rounded-lg m-1 absolute group-hover:flex z-10 sm:text-black h-12 w-12 top-0 sm:bg-slate-300/40  items-center justify-center right-0 hover:bg-slate-900 hover:text-white bg-slate-900 text-white"
+        >
+          <button className="">
             {isMenuOpen ? <IoIosClose /> : <IoIosMore />}
           </button>
         </div>
         {isMenuOpen && (
-          <div className="absolute top-1 left-1  text-white w-3/4 flex gap-2">
+          <div className="absolute z-20 top-1 left-1  text-white w-3/4 flex gap-2">
             <a
               href={image}
               download={image.split("/").pop()}
