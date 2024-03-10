@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { IoIosClose, IoIosMore } from "react-icons/io";
 import { motion } from "framer-motion";
 import { FaShare } from "react-icons/fa6";

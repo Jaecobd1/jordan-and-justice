@@ -1,7 +1,5 @@
-import { motion } from "framer-motion";
 import images from "../../imagePaths.json";
 import { useEffect, useState } from "react";
-import { IoIosMore } from "react-icons/io";
 import Image from "./Image";
 
 function ImageGrid() {
